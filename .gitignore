@@ -175,6 +175,13 @@ $RECYCLE.BIN/
 # noticias_*.json
 # analisis_*.json
 
+# Archivos comprimidos
+*.zip
+*.rar
+*.tar
+*.tar.gz
+*.7z
+
 # Logs
 *.log
 logs/
