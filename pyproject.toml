@@ -1,0 +1,15 @@
+[project]
+name = "agente-financiero"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "certifi>=2026.2.25",
+    "curl-cffi>=0.15.0",
+    "fastmcp>=3.1.1",
+    "httpx>=0.28.1",
+    "playwright>=1.58.0",
+    "scrapy>=2.14.2",
+    "selectolax>=0.4.7",
+]
