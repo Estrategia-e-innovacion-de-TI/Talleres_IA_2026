@@ -51,10 +51,16 @@ EMPRESAS_BVC: Dict[str, EmpresaInfo] = {
     
     # Financiero
     "BANCOLOMBIA": {
-        "ticker": "BCOLOMBIA",
+        "ticker": "CIBEST",
         "nombre_completo": "Bancolombia S.A.",
         "sector": "Financiero",
         "keywords": ["bancolombia", "banco colombia"]
+    },
+    "BANCOLOMBIA_PREF": {
+        "ticker": "PFCIBEST",
+        "nombre_completo": "Bancolombia S.A. Preferencial",
+        "sector": "Financiero",
+        "keywords": ["bancolombia preferencial", "pf bancolombia", "banco colombia preferencial"]
     },
     "DAVIVIENDA": {
         "ticker": "PFDAVVNDA",

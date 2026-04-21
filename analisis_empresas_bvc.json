@@ -1,211 +1,50 @@
 [
   {
-    "ticker": "ISA",
-    "empresa": "Interconexión Eléctrica S.A. E.S.P.",
-    "sector": "Energía - Transmisión",
-    "valoracion": "NEGATIVA",
-    "total_noticias": 13,
-    "analisis_sentimiento": {
-      "positivas": 5,
-      "negativas": 7,
-      "neutrales": 1,
-      "porcentaje_positivo": 38.5,
-      "porcentaje_negativo": 53.8,
-      "porcentaje_neutral": 7.7
-    },
-    "noticias": [
-      {
-        "titulo": "Gobierno Petro confirma que no acabará antes de tiempo la concesión de Autopistas del Café, pero sí avanza en su reversión",
-        "url": "https://www.valoraanalitik.com/gobierno-petro-confirma-no-acabar-antes-tiempo-concesion-autopistas-del-cafe/",
-        "fecha": "2026-03-25T07:10:50",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 4,
-        "score_negativo": 0
-      },
-      {
-        "titulo": "En el mercado energético, a empresas de transmisión y distribución les fue mejor que a las hidroeléctricas o de hidrocarburos en 2025",
-        "url": "https://www.valoraanalitik.com/borrador-automaticoen-el-mercado-energetico-a-empresas-de-transmision-y-distribucion-les-fue-mejor-que-a-las-hidroelectricas-o-de-hidrocarburos-en-2025/",
-        "fecha": "2026-03-23T10:00:35",
-        "sentimiento": "NEUTRAL",
-        "score_positivo": 13,
-        "score_negativo": 13
-      },
-      {
-        "titulo": "Dólar en Colombia abre al alza y analistas anticipan que el petróleo siga empujando la divisa",
-        "url": "https://www.valoraanalitik.com/dolar-en-colombia-abre-al-alza-y-analistas-anticipan-que-el-petroleo-siga-empujando-la-divisa/",
-        "fecha": "2026-03-24T08:40:39",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 2,
-        "score_negativo": 3
-      },
-      {
-        "titulo": "Peso colombiano gana fuerza en medio del aumento global del dólar; repunta el petróleo y se valoriza la deuda pública",
-        "url": "https://www.valoraanalitik.com/peso-colombiano-vuelve-a-caer-pese-al-aumento-global-del-dolar-repunta-el-petroleo-y-se-valoriza-la-deuda-publica/",
-        "fecha": "2026-03-24T16:31:48",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 7,
-        "score_negativo": 6
-      },
-      {
-        "titulo": "Relevante | Se revela cuál miembro de Junta de Ecopetrol frenó unilateralmente investigación contra Ricardo Roa",
-        "url": "https://www.valoraanalitik.com/se-revela-miembro-junta-ecopetrol-freno-unilateralmente-investigacion-ricardo-roa/",
-        "fecha": "2026-03-26T07:10:06",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 0,
-        "score_negativo": 2
-      },
-      {
-        "titulo": "Ahora | Junta de Ecopetrol mantiene a Ricardo Roa como presidente; dice que evalúa «riesgos generados» por sus casos",
-        "url": "https://www.valoraanalitik.com/junta-ecopetrol-mantiene-a-ricardo-roa-como-presidente-evalua-riesgos-generados-casos/",
-        "fecha": "2026-03-25T08:57:15",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 2,
-        "score_negativo": 3
-      },
-      {
-        "titulo": "Gobierno analiza tomar nueva deuda en monedas asiáticas; descarta haber influido en precio del dólar",
-        "url": "https://www.valoraanalitik.com/gobierno-analiza-tomar-nueva-deuda-en-monedas-asiaticas-descarta-haber-influido-en-precio-del-dolar/",
-        "fecha": "2026-03-25T08:25:13",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 1,
-        "score_negativo": 4
-      },
-      {
-        "titulo": "Dólar en Colombia abre con leve presión al alza; petróleo cae pese a que Irán desmiente negociaciones con EE. UU.",
-        "url": "https://www.valoraanalitik.com/dolar-en-colombia-abre-con-leve-presion-al-alza-petroleo-cae-pese-a-que-iran-desmiente-negociaciones-con-ee-uu/",
-        "fecha": "2026-03-25T09:30:31",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 2,
-        "score_negativo": 7
-      },
-      {
-        "titulo": "Dólar en Colombia se estabiliza en $3.680; deuda pública se valoriza",
-        "url": "https://www.valoraanalitik.com/dolar-en-colombia-se-estabiliza-en-3-680-deuda-publica-se-valoriza/",
-        "fecha": "2026-03-25T13:45:27",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 2,
-        "score_negativo": 5
-      },
-      {
-        "titulo": "Premercado | Inversores a la expectativa de posibles negociaciones para el alto al fuego en Medio Oriente",
-        "url": "https://www.valoraanalitik.com/premercado-inversores-a-la-expectativa-de-posibles-negociaciones-para-el-alto-al-fuego-en-medio-oriente/",
-        "fecha": "2026-03-26T06:46:35",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 6,
-        "score_negativo": 7
-      },
-      {
-        "titulo": "Dólar en Colombia abre al alza, pero se mantiene por debajo de $3.700; petróleo vuelve a repuntar",
-        "url": "https://www.valoraanalitik.com/dolar-en-colombia-abre-al-alza-pero-se-mantiene-por-debajo-de-3-700-petroleo-vuelve-a-repuntar/",
-        "fecha": "2026-03-26T08:40:00",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 5,
-        "score_negativo": 3
-      },
-      {
-        "titulo": "Podcast | Mujeres en STEM: la clave para una banca más innovadora y competitiva",
-        "url": "https://www.valoraanalitik.com/podcast-mujeres-en-stem-la-clave-para-una-banca-mas-innovadora-y-competitiva/",
-        "fecha": "2026-03-25T14:36:43",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 4,
-        "score_negativo": 0
-      },
-      {
-        "titulo": "Satena acelera plan de expansión: flota crece 40 % y proyecta expansión internacional",
-        "url": "https://www.valoraanalitik.com/satena-acelera-plan-de-expansion-flota-crece-40-y-proyecta-expansion-internacional/",
-        "fecha": "2026-03-25T15:20:58",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 7,
-        "score_negativo": 1
-      }
-    ]
-  },
-  {
     "ticker": "ECOPETROL",
     "empresa": "Ecopetrol S.A.",
     "sector": "Petróleo y Gas",
-    "valoracion": "NEUTRAL",
-    "total_noticias": 9,
+    "valoracion": "POSITIVA",
+    "total_noticias": 4,
     "analisis_sentimiento": {
-      "positivas": 4,
-      "negativas": 3,
-      "neutrales": 2,
-      "porcentaje_positivo": 44.4,
-      "porcentaje_negativo": 33.3,
-      "porcentaje_neutral": 22.2
+      "positivas": 2,
+      "negativas": 1,
+      "neutrales": 1,
+      "porcentaje_positivo": 50.0,
+      "porcentaje_negativo": 25.0,
+      "porcentaje_neutral": 25.0
     },
     "noticias": [
       {
-        "titulo": "En el mercado energético, a empresas de transmisión y distribución les fue mejor que a las hidroeléctricas o de hidrocarburos en 2025",
-        "url": "https://www.valoraanalitik.com/borrador-automaticoen-el-mercado-energetico-a-empresas-de-transmision-y-distribucion-les-fue-mejor-que-a-las-hidroelectricas-o-de-hidrocarburos-en-2025/",
-        "fecha": "2026-03-23T10:00:35",
+        "titulo": "Entrevista | Gobernador de Atlántico habla de problemas de energía y crisis de Air-e; también de Vía al Mar y aeropuerto de Barranquilla",
+        "url": "https://www.valoraanalitik.com/entrevista-gobernador-de-atlantico-habla-de-problemas-de-energia-y-crisis-de-air-e-tambien-de-via-al-mar-y-aeropuerto-de-barranquilla/",
+        "fecha": "2026-04-18T09:01:28",
+        "sentimiento": "NEGATIVO",
+        "score_positivo": 3,
+        "score_negativo": 5
+      },
+      {
+        "titulo": "Este es el nuevo viraje de la política energética colombiana para traer el gas desde el exterior",
+        "url": "https://www.valoraanalitik.com/este-es-el-nuevo-viraje-de-la-politica-energetica-colombiana-para-traer-el-gas-desde-el-exterior/",
+        "fecha": "2026-04-20T16:04:17",
         "sentimiento": "NEUTRAL",
-        "score_positivo": 13,
-        "score_negativo": 13
-      },
-      {
-        "titulo": "Relevante | Se revela cuál miembro de Junta de Ecopetrol frenó unilateralmente investigación contra Ricardo Roa",
-        "url": "https://www.valoraanalitik.com/se-revela-miembro-junta-ecopetrol-freno-unilateralmente-investigacion-ricardo-roa/",
-        "fecha": "2026-03-26T07:10:06",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 0,
-        "score_negativo": 2
-      },
-      {
-        "titulo": "Expresidente de Hocol denuncia que pareja de Ricardo Roa entrevistó a personas para cargos en Ecopetrol y presionó para dar contratos",
-        "url": "https://www.valoraanalitik.com/expresidente-hocol-pareja-ricardo-roa-entrevisto-personas-cargos-ecopetrol-presiono-dar-contratos/",
-        "fecha": "2026-03-24T11:00:38",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 1,
-        "score_negativo": 0
-      },
-      {
-        "titulo": "Los campos de Ecopetrol en Magdalena Medio y Catatumbo que aportan 10 % del petróleo en Colombia",
-        "url": "https://www.valoraanalitik.com/los-campos-de-ecopetrol-en-magdalena-medio-y-catatumbo-que-aportan-el-10-del-petroleo-en-colombia/",
-        "fecha": "2026-03-24T13:01:58",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 1,
-        "score_negativo": 0
-      },
-      {
-        "titulo": "Ahora | Junta de Ecopetrol mantiene a Ricardo Roa como presidente; dice que evalúa «riesgos generados» por sus casos",
-        "url": "https://www.valoraanalitik.com/junta-ecopetrol-mantiene-a-ricardo-roa-como-presidente-evalua-riesgos-generados-casos/",
-        "fecha": "2026-03-25T08:57:15",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 2,
-        "score_negativo": 3
-      },
-      {
-        "titulo": "Gobierno Petro busca cambiar reglas para elegir directivos de Electrificadora del Meta; accionistas piden frenarlo",
-        "url": "https://www.valoraanalitik.com/gobierno-petro-busca-cambiar-reglas-para-elegir-directivos-de-emsa/",
-        "fecha": "2026-03-25T10:00:53",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 2,
-        "score_negativo": 4
-      },
-      {
-        "titulo": "Combustibles fósiles seguirán siendo esenciales para Colombia al menos hasta 2040; gasolina tendría que importarse",
-        "url": "https://www.valoraanalitik.com/combustibles-fosiles-escenciales-colombia/",
-        "fecha": "2026-03-25T11:01:20",
-        "sentimiento": "POSITIVO",
         "score_positivo": 5,
+        "score_negativo": 5
+      },
+      {
+        "titulo": "Fracking e importación de gas son algunos de los temas que están marcando el ritmo del sector energético en Colombia",
+        "url": "https://www.valoraanalitik.com/fracking-e-importacion-de-gas-son-algunos-de-los-temas-que-estan-marcando-el-ritmo-del-sector-energetico-en-colombia/",
+        "fecha": "2026-04-20T07:20:19",
+        "sentimiento": "POSITIVO",
+        "score_positivo": 2,
         "score_negativo": 1
       },
       {
-        "titulo": "Choco Krispis rompió una marca mundial con el dominó de cajas de cereal más grande del mundo",
-        "url": "https://www.valoraanalitik.com/choco-krispis-rompio-una-marca-mundial-en-colombia/",
-        "fecha": "2026-03-25T13:20:22",
+        "titulo": "Guerra en Irán presiona a la baja la demanda de gasolina, diésel y gas",
+        "url": "https://www.valoraanalitik.com/guerra-en-iran-presiona-a-la-baja-la-demanda-de-gasolina-diesel-y-gas/",
+        "fecha": "2026-04-21T06:20:48",
         "sentimiento": "POSITIVO",
-        "score_positivo": 5,
-        "score_negativo": 2
-      },
-      {
-        "titulo": "Ahora | Juan Carlos Echeverry es el nuevo presidente de Banco de Bogotá",
-        "url": "https://www.valoraanalitik.com/juan-carlos-echeverry-nuevo-presidente-de-banco-de-bogota/",
-        "fecha": "2026-03-26T10:02:29",
-        "sentimiento": "NEUTRAL",
-        "score_positivo": 0,
-        "score_negativo": 0
+        "score_positivo": 9,
+        "score_negativo": 8
       }
     ]
   },
@@ -213,63 +52,6 @@
     "ticker": "PROMIGAS",
     "empresa": "Promigas S.A. E.S.P.",
     "sector": "Gas Natural",
-    "valoracion": "NEGATIVA",
-    "total_noticias": 5,
-    "analisis_sentimiento": {
-      "positivas": 1,
-      "negativas": 3,
-      "neutrales": 1,
-      "porcentaje_positivo": 20.0,
-      "porcentaje_negativo": 60.0,
-      "porcentaje_neutral": 20.0
-    },
-    "noticias": [
-      {
-        "titulo": "Guerra en Irán amenaza la seguridad alimentaria global por falta de fertilizantes",
-        "url": "https://www.valoraanalitik.com/guerra-en-iran-amenaza-la-seguridad-alimentaria-global-por-falta-de-fertilizantes/",
-        "fecha": "2026-03-24T18:40:41",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 1,
-        "score_negativo": 7
-      },
-      {
-        "titulo": "En el mercado energético, a empresas de transmisión y distribución les fue mejor que a las hidroeléctricas o de hidrocarburos en 2025",
-        "url": "https://www.valoraanalitik.com/borrador-automaticoen-el-mercado-energetico-a-empresas-de-transmision-y-distribucion-les-fue-mejor-que-a-las-hidroelectricas-o-de-hidrocarburos-en-2025/",
-        "fecha": "2026-03-23T10:00:35",
-        "sentimiento": "NEUTRAL",
-        "score_positivo": 13,
-        "score_negativo": 13
-      },
-      {
-        "titulo": "Premercado | Bolsas suben tras declaraciones de Trump sobre posible fin de la guerra en Medio Oriente; petróleo baja",
-        "url": "https://www.valoraanalitik.com/premercado-bolsas-suben-tras-declaraciones-de-trump-sobre-posible-fin-de-la-guerra-en-medio-oriente-petroleo-baja/",
-        "fecha": "2026-03-25T06:45:39",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 8,
-        "score_negativo": 4
-      },
-      {
-        "titulo": "Premercado | Inversores a la expectativa de posibles negociaciones para el alto al fuego en Medio Oriente",
-        "url": "https://www.valoraanalitik.com/premercado-inversores-a-la-expectativa-de-posibles-negociaciones-para-el-alto-al-fuego-en-medio-oriente/",
-        "fecha": "2026-03-26T06:46:35",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 6,
-        "score_negativo": 7
-      },
-      {
-        "titulo": "Conflicto en Medio Oriente podría encarecer insumos del agro y disparar la inflación en Colombia",
-        "url": "https://www.valoraanalitik.com/conflicto-en-medio-oriente-podria-encarecer-insumos-del-agro-y-disparar-la-inflacion-en-colombia/",
-        "fecha": "2026-03-26T08:20:21",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 4,
-        "score_negativo": 7
-      }
-    ]
-  },
-  {
-    "ticker": "CELSIA",
-    "empresa": "Celsia S.A. E.S.P.",
-    "sector": "Energía",
     "valoracion": "POSITIVA",
     "total_noticias": 3,
     "analisis_sentimiento": {
@@ -282,68 +64,27 @@
     },
     "noticias": [
       {
-        "titulo": "En el mercado energético, a empresas de transmisión y distribución les fue mejor que a las hidroeléctricas o de hidrocarburos en 2025",
-        "url": "https://www.valoraanalitik.com/borrador-automaticoen-el-mercado-energetico-a-empresas-de-transmision-y-distribucion-les-fue-mejor-que-a-las-hidroelectricas-o-de-hidrocarburos-en-2025/",
-        "fecha": "2026-03-23T10:00:35",
+        "titulo": "Este es el nuevo viraje de la política energética colombiana para traer el gas desde el exterior",
+        "url": "https://www.valoraanalitik.com/este-es-el-nuevo-viraje-de-la-politica-energetica-colombiana-para-traer-el-gas-desde-el-exterior/",
+        "fecha": "2026-04-20T16:04:17",
         "sentimiento": "NEUTRAL",
-        "score_positivo": 13,
-        "score_negativo": 13
+        "score_positivo": 5,
+        "score_negativo": 5
       },
       {
-        "titulo": "Fuerte alza en acciones de Celsia tras propuesta de recompra de acciones a $9.002",
-        "url": "https://www.valoraanalitik.com/fuerte-alza-en-acciones-de-celsia-tras-propuesta-de-recompra-de-acciones-a-9-002/",
-        "fecha": "2026-03-24T09:52:24",
+        "titulo": "Fracking e importación de gas son algunos de los temas que están marcando el ritmo del sector energético en Colombia",
+        "url": "https://www.valoraanalitik.com/fracking-e-importacion-de-gas-son-algunos-de-los-temas-que-estan-marcando-el-ritmo-del-sector-energetico-en-colombia/",
+        "fecha": "2026-04-20T07:20:19",
         "sentimiento": "POSITIVO",
-        "score_positivo": 6,
+        "score_positivo": 2,
         "score_negativo": 1
       },
       {
-        "titulo": "Asamblea Celsia: datos claves y guía para la recompra extraordinaria de acciones hasta por $150.000 millones",
-        "url": "https://www.valoraanalitik.com/asamblea-celsia-guia-para-la-recompra-extraordinaria-de-acciones-hasta-por-150-000-millones/",
-        "fecha": "2026-03-25T12:10:51",
+        "titulo": "Premercado | Optimismo por posible nueva ronda de negociaciones entre EE. UU. e Irán mueve bolsas; petróleo cae",
+        "url": "https://www.valoraanalitik.com/premercado-optimismo-por-posible-nueva-ronda-de-negociaciones-entre-ee-uu-e-iran-mueve-bolsas-petroleo-cae/",
+        "fecha": "2026-04-21T07:00:25",
         "sentimiento": "POSITIVO",
-        "score_positivo": 3,
-        "score_negativo": 0
-      }
-    ]
-  },
-  {
-    "ticker": "GEB",
-    "empresa": "Grupo Energía Bogotá S.A. E.S.P.",
-    "sector": "Energía",
-    "valoracion": "NEGATIVA",
-    "total_noticias": 3,
-    "analisis_sentimiento": {
-      "positivas": 0,
-      "negativas": 2,
-      "neutrales": 1,
-      "porcentaje_positivo": 0.0,
-      "porcentaje_negativo": 66.7,
-      "porcentaje_neutral": 33.3
-    },
-    "noticias": [
-      {
-        "titulo": "En el mercado energético, a empresas de transmisión y distribución les fue mejor que a las hidroeléctricas o de hidrocarburos en 2025",
-        "url": "https://www.valoraanalitik.com/borrador-automaticoen-el-mercado-energetico-a-empresas-de-transmision-y-distribucion-les-fue-mejor-que-a-las-hidroelectricas-o-de-hidrocarburos-en-2025/",
-        "fecha": "2026-03-23T10:00:35",
-        "sentimiento": "NEUTRAL",
-        "score_positivo": 13,
-        "score_negativo": 13
-      },
-      {
-        "titulo": "Relevante | Se revela cuál miembro de Junta de Ecopetrol frenó unilateralmente investigación contra Ricardo Roa",
-        "url": "https://www.valoraanalitik.com/se-revela-miembro-junta-ecopetrol-freno-unilateralmente-investigacion-ricardo-roa/",
-        "fecha": "2026-03-26T07:10:06",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 0,
-        "score_negativo": 2
-      },
-      {
-        "titulo": "Gobierno Petro busca cambiar reglas para elegir directivos de Electrificadora del Meta; accionistas piden frenarlo",
-        "url": "https://www.valoraanalitik.com/gobierno-petro-busca-cambiar-reglas-para-elegir-directivos-de-emsa/",
-        "fecha": "2026-03-25T10:00:53",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 2,
+        "score_positivo": 10,
         "score_negativo": 4
       }
     ]
@@ -352,139 +93,90 @@
     "ticker": "BANCOLOMBIA",
     "empresa": "Bancolombia S.A.",
     "sector": "Financiero",
-    "valoracion": "POSITIVA",
-    "total_noticias": 3,
-    "analisis_sentimiento": {
-      "positivas": 3,
-      "negativas": 0,
-      "neutrales": 0,
-      "porcentaje_positivo": 100.0,
-      "porcentaje_negativo": 0.0,
-      "porcentaje_neutral": 0.0
-    },
-    "noticias": [
-      {
-        "titulo": "Fuerte alza en acciones de Celsia tras propuesta de recompra de acciones a $9.002",
-        "url": "https://www.valoraanalitik.com/fuerte-alza-en-acciones-de-celsia-tras-propuesta-de-recompra-de-acciones-a-9-002/",
-        "fecha": "2026-03-24T09:52:24",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 6,
-        "score_negativo": 1
-      },
-      {
-        "titulo": "Podcast | Mujeres en STEM: la clave para una banca más innovadora y competitiva",
-        "url": "https://www.valoraanalitik.com/podcast-mujeres-en-stem-la-clave-para-una-banca-mas-innovadora-y-competitiva/",
-        "fecha": "2026-03-25T14:36:43",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 4,
-        "score_negativo": 0
-      },
-      {
-        "titulo": "Interactuar acompañó a más de 50.000 empresarios en 2025 y reveló los planes para los próximos años",
-        "url": "https://www.valoraanalitik.com/interactuar-acompano-empresarios-2025/",
-        "fecha": "2026-03-25T17:00:34",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 10,
-        "score_negativo": 1
-      }
-    ]
-  },
-  {
-    "ticker": "TERPEL",
-    "empresa": "Organización Terpel S.A.",
-    "sector": "Combustibles",
-    "valoracion": "POSITIVA",
+    "valoracion": "NEUTRAL",
     "total_noticias": 2,
     "analisis_sentimiento": {
       "positivas": 1,
-      "negativas": 0,
-      "neutrales": 1,
+      "negativas": 1,
+      "neutrales": 0,
       "porcentaje_positivo": 50.0,
-      "porcentaje_negativo": 0.0,
-      "porcentaje_neutral": 50.0
-    },
-    "noticias": [
-      {
-        "titulo": "En el mercado energético, a empresas de transmisión y distribución les fue mejor que a las hidroeléctricas o de hidrocarburos en 2025",
-        "url": "https://www.valoraanalitik.com/borrador-automaticoen-el-mercado-energetico-a-empresas-de-transmision-y-distribucion-les-fue-mejor-que-a-las-hidroelectricas-o-de-hidrocarburos-en-2025/",
-        "fecha": "2026-03-23T10:00:35",
-        "sentimiento": "NEUTRAL",
-        "score_positivo": 13,
-        "score_negativo": 13
-      },
-      {
-        "titulo": "Reconocido centro comercial en Santander crece a doble dígito tras apostar por innovación clave",
-        "url": "https://www.valoraanalitik.com/centro-comercial-en-santander-crece-a-doble-digito-tras-implementar-energia-solar/",
-        "fecha": "2026-03-25T15:30:21",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 4,
-        "score_negativo": 1
-      }
-    ]
-  },
-  {
-    "ticker": "BVC",
-    "empresa": "Bolsa de Valores de Colombia S.A.",
-    "sector": "Mercado de Capitales",
-    "valoracion": "POSITIVA",
-    "total_noticias": 2,
-    "analisis_sentimiento": {
-      "positivas": 2,
-      "negativas": 0,
-      "neutrales": 0,
-      "porcentaje_positivo": 100.0,
-      "porcentaje_negativo": 0.0,
+      "porcentaje_negativo": 50.0,
       "porcentaje_neutral": 0.0
     },
     "noticias": [
       {
-        "titulo": "Fuerte alza en acciones de Celsia tras propuesta de recompra de acciones a $9.002",
-        "url": "https://www.valoraanalitik.com/fuerte-alza-en-acciones-de-celsia-tras-propuesta-de-recompra-de-acciones-a-9-002/",
-        "fecha": "2026-03-24T09:52:24",
+        "titulo": "Dólar en Colombia abre a $3.585; el peso en su soporte crítico mientras Ormuz vuelve a encenderse",
+        "url": "https://www.valoraanalitik.com/dolar-en-colombia-abre-a-3-585-el-peso-en-su-soporte-critico-mientras-ormuz-vuelve-a-encenderse/",
+        "fecha": "2026-04-20T10:28:40",
         "sentimiento": "POSITIVO",
-        "score_positivo": 6,
-        "score_negativo": 1
+        "score_positivo": 5,
+        "score_negativo": 3
       },
       {
-        "titulo": "Una nueva cervecería llega a la Bolsa de Colombia con emisión de acciones en a2censo: así puede invertir",
-        "url": "https://www.valoraanalitik.com/nueva-cerveceria-llega-bolsa-de-colombia/",
-        "fecha": "2026-03-25T14:40:49",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 6,
-        "score_negativo": 1
-      }
-    ]
-  },
-  {
-    "ticker": "GRUPOARGOS",
-    "empresa": "Grupo Argos S.A.",
-    "sector": "Holding",
-    "valoracion": "POSITIVA",
-    "total_noticias": 2,
-    "analisis_sentimiento": {
-      "positivas": 2,
-      "negativas": 0,
-      "neutrales": 0,
-      "porcentaje_positivo": 100.0,
-      "porcentaje_negativo": 0.0,
-      "porcentaje_neutral": 0.0
-    },
-    "noticias": [
-      {
-        "titulo": "Fuerte alza en acciones de Celsia tras propuesta de recompra de acciones a $9.002",
-        "url": "https://www.valoraanalitik.com/fuerte-alza-en-acciones-de-celsia-tras-propuesta-de-recompra-de-acciones-a-9-002/",
-        "fecha": "2026-03-24T09:52:24",
-        "sentimiento": "POSITIVO",
-        "score_positivo": 6,
-        "score_negativo": 1
-      },
-      {
-        "titulo": "Asamblea Celsia: datos claves y guía para la recompra extraordinaria de acciones hasta por $150.000 millones",
-        "url": "https://www.valoraanalitik.com/asamblea-celsia-guia-para-la-recompra-extraordinaria-de-acciones-hasta-por-150-000-millones/",
-        "fecha": "2026-03-25T12:10:51",
-        "sentimiento": "POSITIVO",
+        "titulo": "Dólar en Colombia cierra a la baja; el peso resiste el nuevo choque petrolero en Ormuz y la deuda pública se valoriza",
+        "url": "https://www.valoraanalitik.com/dolar-en-colombia-cierra-a-la-baja-el-peso-resiste-el-nuevo-choque-petrolero-en-ormuz-y-la-deuda-publica-se-valoriza/",
+        "fecha": "2026-04-20T13:54:24",
+        "sentimiento": "NEGATIVO",
         "score_positivo": 3,
+        "score_negativo": 5
+      }
+    ]
+  },
+  {
+    "ticker": "ISA",
+    "empresa": "Interconexión Eléctrica S.A. E.S.P.",
+    "sector": "Energía - Transmisión",
+    "valoracion": "POSITIVA",
+    "total_noticias": 2,
+    "analisis_sentimiento": {
+      "positivas": 2,
+      "negativas": 0,
+      "neutrales": 0,
+      "porcentaje_positivo": 100.0,
+      "porcentaje_negativo": 0.0,
+      "porcentaje_neutral": 0.0
+    },
+    "noticias": [
+      {
+        "titulo": "Feria EVA sigue apostando por la experiencia con su nueva edición: ¿cuáles son las novedades?",
+        "url": "https://www.valoraanalitik.com/feria-eva-sigue-apostando-por-la-experiencia-con-su-nueva-edicion/",
+        "fecha": "2026-04-21T13:00:26",
+        "sentimiento": "POSITIVO",
+        "score_positivo": 2,
         "score_negativo": 0
+      },
+      {
+        "titulo": "En marzo, inflación y posible fenómeno de El Niño elevaron precio de energía para hogares y pequeños negocios",
+        "url": "https://www.valoraanalitik.com/en-marzo-inflacion-y-posible-fenomeno-de-el-nino-elevaron-precio-de-energia-para-hogares-y-pequenos-negocios/",
+        "fecha": "2026-04-21T16:41:23",
+        "sentimiento": "POSITIVO",
+        "score_positivo": 7,
+        "score_negativo": 2
+      }
+    ]
+  },
+  {
+    "ticker": "MINEROS",
+    "empresa": "Mineros S.A.",
+    "sector": "Minería - Oro",
+    "valoracion": "POSITIVA",
+    "total_noticias": 1,
+    "analisis_sentimiento": {
+      "positivas": 1,
+      "negativas": 0,
+      "neutrales": 0,
+      "porcentaje_positivo": 100.0,
+      "porcentaje_negativo": 0.0,
+      "porcentaje_neutral": 0.0
+    },
+    "noticias": [
+      {
+        "titulo": "Nuevo estudio de EConcept confirma datos y cifras claves de Proyecto Quebradona para Jericó y Colombia",
+        "url": "https://www.valoraanalitik.com/nuevo-estudio-confirma-datos-cifras-proyecto-quebradona/",
+        "fecha": "2026-04-17T09:38:38",
+        "sentimiento": "POSITIVO",
+        "score_positivo": 12,
+        "score_negativo": 4
       }
     ]
   },
@@ -493,56 +185,23 @@
     "empresa": "Banco de Bogotá S.A.",
     "sector": "Financiero",
     "valoracion": "NEGATIVA",
-    "total_noticias": 2,
-    "analisis_sentimiento": {
-      "positivas": 0,
-      "negativas": 1,
-      "neutrales": 1,
-      "porcentaje_positivo": 0.0,
-      "porcentaje_negativo": 50.0,
-      "porcentaje_neutral": 50.0
-    },
-    "noticias": [
-      {
-        "titulo": "Más allá de las emergencias: la temporada de lluvias en Colombia amenaza tres de cada 10 empleos",
-        "url": "https://www.valoraanalitik.com/temporada-de-lluvias-en-colombia-tambien-amenaza-empleos/",
-        "fecha": "2026-03-25T20:30:29",
-        "sentimiento": "NEGATIVO",
-        "score_positivo": 0,
-        "score_negativo": 8
-      },
-      {
-        "titulo": "Ahora | Juan Carlos Echeverry es el nuevo presidente de Banco de Bogotá",
-        "url": "https://www.valoraanalitik.com/juan-carlos-echeverry-nuevo-presidente-de-banco-de-bogota/",
-        "fecha": "2026-03-26T10:02:29",
-        "sentimiento": "NEUTRAL",
-        "score_positivo": 0,
-        "score_negativo": 0
-      }
-    ]
-  },
-  {
-    "ticker": "MINEROS",
-    "empresa": "Mineros S.A.",
-    "sector": "Minería - Oro",
-    "valoracion": "NEUTRAL",
     "total_noticias": 1,
     "analisis_sentimiento": {
       "positivas": 0,
-      "negativas": 0,
-      "neutrales": 1,
+      "negativas": 1,
+      "neutrales": 0,
       "porcentaje_positivo": 0.0,
-      "porcentaje_negativo": 0.0,
-      "porcentaje_neutral": 100.0
+      "porcentaje_negativo": 100.0,
+      "porcentaje_neutral": 0.0
     },
     "noticias": [
       {
-        "titulo": "En el mercado energético, a empresas de transmisión y distribución les fue mejor que a las hidroeléctricas o de hidrocarburos en 2025",
-        "url": "https://www.valoraanalitik.com/borrador-automaticoen-el-mercado-energetico-a-empresas-de-transmision-y-distribucion-les-fue-mejor-que-a-las-hidroelectricas-o-de-hidrocarburos-en-2025/",
-        "fecha": "2026-03-23T10:00:35",
-        "sentimiento": "NEUTRAL",
-        "score_positivo": 13,
-        "score_negativo": 13
+        "titulo": "Dólar en Colombia cierra a la baja; el peso resiste el nuevo choque petrolero en Ormuz y la deuda pública se valoriza",
+        "url": "https://www.valoraanalitik.com/dolar-en-colombia-cierra-a-la-baja-el-peso-resiste-el-nuevo-choque-petrolero-en-ormuz-y-la-deuda-publica-se-valoriza/",
+        "fecha": "2026-04-20T13:54:24",
+        "sentimiento": "NEGATIVO",
+        "score_positivo": 3,
+        "score_negativo": 5
       }
     ]
   },
@@ -562,11 +221,11 @@
     },
     "noticias": [
       {
-        "titulo": "Interactuar acompañó a más de 50.000 empresarios en 2025 y reveló los planes para los próximos años",
-        "url": "https://www.valoraanalitik.com/interactuar-acompano-empresarios-2025/",
-        "fecha": "2026-03-25T17:00:34",
+        "titulo": "Primicia | Este es el fondo de inversión que se quedó con Kokoriko y así concretó su movida por la cadena de pollos",
+        "url": "https://www.valoraanalitik.com/fondo-inversion-que-se-quedo-con-kokoriko-asi-concreto-movida-cadena-de-pollos/",
+        "fecha": "2026-04-21T14:35:29",
         "sentimiento": "POSITIVO",
-        "score_positivo": 10,
+        "score_positivo": 2,
         "score_negativo": 1
       }
     ]

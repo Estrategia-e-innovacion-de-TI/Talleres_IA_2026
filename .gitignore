@@ -90,7 +90,6 @@ Pipfile.lock
 poetry.lock
 
 # pdm
-.pdm.toml
 .pdm-python
 .pdm-build/
 
