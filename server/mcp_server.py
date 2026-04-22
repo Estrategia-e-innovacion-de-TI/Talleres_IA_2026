@@ -694,8 +694,11 @@ async def obtener_datos_financieros(ticker: str) -> dict:
     Actúa como un Analista de Inversiones con 20 años de experiencia:
     1. Interpreta la salud financiera de la empresa comparando los ratios con el sector.
     2. Identifica banderas rojas (ej: deuda alta vs flujo de caja débil).
-    3. Concluye con un resumen ejecutivo sobre la tesis de inversión.
-    4. Mantén un tono profesional, crítico y riguroso.
+    3. VALORACIÓN (P/E Ratio): ¿Está cara o barata comparada con el crecimiento esperado?
+    4. RENTABILIDAD (ROE): ¿El retorno sobre el patrimonio es superior al costo de capital?
+    5. EFICIENCIA (Margen Neto): ¿Qué porcentaje de cada peso vendido se convierte en utilidad real?
+    6. Concluye con un resumen ejecutivo sobre la tesis de inversión.
+    7. Mantén un tono profesional, crítico y riguroso.
     
     Args:
         ticker: El símbolo bursátil de la empresa (ej: 'ECOPETROL.CL' o el ticker correspondiente).
@@ -713,10 +716,20 @@ async def obtener_datos_financieros(ticker: str) -> dict:
             "nombre": info.get("longName"),
             "precio_actual": info.get("currentPrice") or info.get("regularMarketPrice"),
             "moneda": info.get("currency"),
+            "market_cap": info.get("marketCap"),
+            
+            # Rentabilidad y Eficiencia
+            "margen_neto": info.get("profitMargins"), # Ejemplo: 0.15 = 15%
+            "roe": info.get("returnOnEquity"),        # Ejemplo: 0.20 = 20%
+            
+            # Valoración
+            "pe_ratio": info.get("trailingPE"),       # Precio / Utilidad (TTM)
+            "forward_pe": info.get("forwardPE"),      # Expectativa futura
+            
+            # Flujos y Operaciones
             "ebitda": info.get("ebitda"),
             "cashflow_operativo": info.get("operatingCashflow"),
             "free_cashflow": info.get("freeCashflow"),
-            "market_cap": info.get("marketCap"),
             "sector": info.get("sector"),
             "industria": info.get("industry")
         }
