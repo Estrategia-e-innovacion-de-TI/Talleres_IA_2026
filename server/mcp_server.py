@@ -13,7 +13,7 @@ import json
 import logging
 import sys
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, Optional, List
 from fastmcp import FastMCP
@@ -22,6 +22,9 @@ import os
 import yfinance as yf
 from curl_cffi import requests
 import re
+
+from analisis_tecnico import run_gru_prediction
+from model_kronos import run_kronos_prediction
 
 # Configuración de logging
 logging.basicConfig(
@@ -47,8 +50,54 @@ processes: Dict[str, asyncio.subprocess.Process] = {}
 TICKER_MAP = {
     "BANCOLOMBIA": "CIBEST.CL",
     "BANCOLOMBIA_PREF": "PFCIBEST.CL",
+    "ECOPETROL": "EC.CL",
+    "GRUPO_SURA": "GRUPOSURA.CL",
+    "ISA": "ISA.CL",
+    "NUTRESA": "NUTRESA.CL",
+    "CEMARGOS": "CEMARGOS.CL",
     # Puedes agregar más mapeos aquí si es necesario
 }
+
+
+def _resolver_ticker_colombiano(ticker: str) -> str:
+    """Normaliza un ticker local para consulta en Yahoo Finance."""
+    ticker_limpio = (ticker or "").strip().upper()
+    if not ticker_limpio:
+        return ""
+
+    if ticker_limpio in TICKER_MAP:
+        return TICKER_MAP[ticker_limpio]
+
+    # Si ya viene con sufijo de mercado (ej: EC.CL), se usa tal cual.
+    if "." in ticker_limpio:
+        return ticker_limpio
+
+    return f"{ticker_limpio}.CL"
+
+
+def _regresion_lineal_simple(serie: List[float]) -> tuple[float, float, float]:
+    """Retorna intercepto, pendiente y desviación estándar residual."""
+    n = len(serie)
+    x_vals = list(range(n))
+
+    suma_x = sum(x_vals)
+    suma_y = sum(serie)
+    suma_xy = sum(x * y for x, y in zip(x_vals, serie))
+    suma_x2 = sum(x * x for x in x_vals)
+
+    denominador = (n * suma_x2) - (suma_x ** 2)
+    if denominador == 0:
+        pendiente = 0.0
+    else:
+        pendiente = ((n * suma_xy) - (suma_x * suma_y)) / denominador
+
+    intercepto = (suma_y - (pendiente * suma_x)) / n
+
+    residuos = [y - (intercepto + pendiente * x) for x, y in zip(x_vals, serie)]
+    varianza_residual = sum(r * r for r in residuos) / max(n - 2, 1)
+    sigma = varianza_residual ** 0.5
+
+    return intercepto, pendiente, sigma
 
 @mcp.tool()
 async def ejecutar_scraper_valora(
@@ -677,13 +726,7 @@ async def analizar_sentimiento_empresas_bvc(
         
     except Exception as e:
         return f"❌ Error al analizar sentimiento: {str(e)}"
-
-
-
-# =====================================================================
-# SEGUNDA SESIÓN - ANÁLISIS FUNDAMENTAL Y FINANCIERO
-# =====================================================================
-
+    
 @mcp.tool()
 async def obtener_datos_financieros(ticker: str) -> dict:
     """
@@ -739,6 +782,272 @@ async def obtener_datos_financieros(ticker: str) -> dict:
     except Exception as e:
         return {"error": f"No se pudo obtener la información para {ticker}: {str(e)}"}
     
+# =====================================================================
+# TERCERA SESIÓN - ANÁLISIS TÉCNICO Y FINANCIERO
+# =====================================================================
+
+@mcp.tool()
+async def predict_stock_kronos(
+    ticker: str,
+    start_date: str,
+    end_date: str,
+    lookback: int = 343,
+    pred_len: int = 7
+):
+    """
+    Ejecuta el modelo Kronos para predecir precios
+    y volumen de un activo financiero.
+
+    Args:
+        ticker:
+            Ticker de Yahoo Finance.
+            Ejemplos:
+            - AAPL
+            - TSLA
+            - PFAVAL.CL
+            - BTC-USD
+
+        start_date:
+            Fecha inicial histórica.
+            Formato: YYYY-MM-DD
+
+        end_date:
+            Fecha final histórica.
+            Formato: YYYY-MM-DD
+
+        lookback:
+            Cantidad de registros históricos
+            usados como contexto.
+
+        pred_len:
+            Cantidad de pasos futuros
+            a predecir.
+
+    Returns:
+        Diccionario con:
+        - ticker
+        - forecast
+        - chart_path
+    """
+
+    try:
+
+        result = run_kronos_prediction(
+            ticker=ticker,
+            start_date=start_date,
+            end_date=end_date,
+            lookback=lookback,
+            pred_len=pred_len
+        )
+
+        print("Registrando tool predict_stock_kronos")
+
+        return {
+            "success": True,
+            "data": result
+        }
+
+    except Exception as e:
+
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
+
+@mcp.tool()
+async def predict_stock_gru(
+    ticker: str,
+    start_date: str,
+    end_date: str,
+    lookback: int = 30,
+    pred_len: int = 1,
+    test_size: float = 0.15,
+    epochs: int = 30,
+    batch_size: int = 32
+):
+    """
+    Ejecuta un modelo GRU para predecir el precio de cierre
+    de un activo financiero.
+
+    Args:
+        ticker:
+            Ticker de Yahoo Finance.
+            Ejemplos:
+            - AAPL
+            - TSLA
+            - PFAVAL.CL
+            - BTC-USD
+
+        start_date:
+            Fecha inicial histórica.
+            Formato: YYYY-MM-DD
+
+        end_date:
+            Fecha final histórica.
+            Formato: YYYY-MM-DD
+
+        lookback:
+            Cantidad de cierres históricos usados por secuencia.
+
+        pred_len:
+            Cantidad de días hábiles hacia adelante a predecir.
+
+        test_size:
+            Proporción del dataset reservada para prueba.
+
+        epochs:
+            Máximo de épocas de entrenamiento.
+
+        batch_size:
+            Tamaño del lote de entrenamiento.
+
+    Returns:
+        Diccionario con:
+        - ticker
+        - lookback
+        - pred_len
+        - metrics
+        - next_business_day_prediction
+        - forecast
+        - chart_path
+    """
+
+    try:
+        result = run_gru_prediction(
+            ticker=ticker,
+            start_date=start_date,
+            end_date=end_date,
+            lookback=lookback,
+            pred_len=pred_len,
+            test_size=test_size,
+            epochs=epochs,
+            batch_size=batch_size
+        )
+
+
+        return {
+            "success": True,
+            "data": result
+        }
+
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)
+        }
+    
+
+    
+# async def predecir_precio_accion_colombiana(
+#     ticker: str,
+#     dias_historial: int = 180,
+#     dias_futuro: int = 30
+# ) -> str:
+#     """
+#     Predice el precio futuro de una acción colombiana usando tendencia lineal.
+
+#     Args:
+#         ticker: Ticker local (ej: ECOPETROL, BANCOLOMBIA) o ticker Yahoo (ej: EC.CL).
+#         dias_historial: Días históricos a usar para entrenar el modelo (default: 180).
+#         dias_futuro: Días hacia adelante para proyectar (default: 30).
+
+#     Returns:
+#         Resumen de la predicción con precio objetivo e intervalo estimado.
+#     """
+#     if not ticker or not isinstance(ticker, str):
+#         return "❌ Error: Debes enviar un ticker válido como texto."
+
+#     if not isinstance(dias_historial, int) or dias_historial < 30 or dias_historial > 2000:
+#         return "❌ Error: 'dias_historial' debe ser un entero entre 30 y 2000."
+
+#     if not isinstance(dias_futuro, int) or dias_futuro < 1 or dias_futuro > 365:
+#         return "❌ Error: 'dias_futuro' debe ser un entero entre 1 y 365."
+
+#     ticker_consulta = _resolver_ticker_colombiano(ticker)
+#     if not ticker_consulta:
+#         return "❌ Error: No fue posible normalizar el ticker recibido."
+
+#     try:
+#         activo = yf.Ticker(ticker_consulta)
+#         historico = activo.history(period=f"{dias_historial}d", interval="1d", auto_adjust=True)
+
+#         if historico.empty or "Close" not in historico.columns:
+#             return (
+#                 f"❌ No se encontró historial para '{ticker}'. "
+#                 f"Ticker consultado en Yahoo: {ticker_consulta}."
+#             )
+
+#         cierres = [float(v) for v in historico["Close"].dropna().tolist()]
+#         if len(cierres) < 30:
+#             return (
+#                 f"❌ Historial insuficiente para modelar '{ticker_consulta}'. "
+#                 f"Solo se obtuvieron {len(cierres)} cierres válidos."
+#             )
+
+#         intercepto, pendiente, sigma = _regresion_lineal_simple(cierres)
+
+#         indice_objetivo = (len(cierres) - 1) + dias_futuro
+#         precio_proyectado = max(0.01, intercepto + (pendiente * indice_objetivo))
+#         banda_95_min = max(0.01, precio_proyectado - (1.96 * sigma))
+#         banda_95_max = max(banda_95_min, precio_proyectado + (1.96 * sigma))
+
+#         precio_actual = cierres[-1]
+#         variacion_pct = ((precio_proyectado / precio_actual) - 1) * 100 if precio_actual else 0
+
+#         sma20 = sum(cierres[-20:]) / 20 if len(cierres) >= 20 else None
+#         sma50 = sum(cierres[-50:]) / 50 if len(cierres) >= 50 else None
+
+#         retornos = [(cierres[i] / cierres[i - 1]) - 1 for i in range(1, len(cierres)) if cierres[i - 1] != 0]
+#         if len(retornos) > 1:
+#             media_ret = sum(retornos) / len(retornos)
+#             var_ret = sum((r - media_ret) ** 2 for r in retornos) / (len(retornos) - 1)
+#             volatilidad_anual = (var_ret ** 0.5) * (252 ** 0.5) * 100
+#         else:
+#             volatilidad_anual = 0.0
+
+#         tendencia = "alcista" if pendiente > 0 else "bajista" if pendiente < 0 else "lateral"
+
+#         fecha_ultima = historico.index[-1]
+#         if hasattr(fecha_ultima, "to_pydatetime"):
+#             fecha_base = fecha_ultima.to_pydatetime().date()
+#         else:
+#             fecha_base = datetime.strptime(str(fecha_ultima)[:10], "%Y-%m-%d").date()
+#         fecha_objetivo = (fecha_base + timedelta(days=dias_futuro)).isoformat()
+
+#         try:
+#             nombre_empresa = activo.info.get("longName") or ticker_consulta
+#         except Exception:
+#             nombre_empresa = ticker_consulta
+
+#         return f"""{'='*72}
+# {'PREDICCIÓN DE PRECIO - ACCIÓN COLOMBIANA':^72}
+# {'='*72}
+
+# Empresa: {nombre_empresa}
+# Ticker solicitado: {ticker.upper()}
+# Ticker consultado: {ticker_consulta}
+# Fecha última observación: {fecha_base.isoformat()}
+# Fecha objetivo: {fecha_objetivo}
+
+# Precio actual: {precio_actual:.2f}
+# Precio proyectado ({dias_futuro} días): {precio_proyectado:.2f}
+# Variación estimada: {variacion_pct:.2f}%
+# Rango estimado 95%: [{banda_95_min:.2f}, {banda_95_max:.2f}]
+
+# Tendencia inferida: {tendencia}
+# Pendiente diaria del modelo: {pendiente:.4f}
+# SMA 20: {(f'{sma20:.2f}' if sma20 is not None else 'N/D')}
+# SMA 50: {(f'{sma50:.2f}' if sma50 is not None else 'N/D')}
+# Volatilidad anualizada: {volatilidad_anual:.2f}%
+
+# Modelo utilizado: regresión lineal simple sobre cierres ajustados diarios.
+# ⚠️ Nota: esta proyección es estadística y no constituye recomendación financiera.
+# """
+
+#     except Exception as e:
+#         return f"❌ Error al predecir el precio para {ticker_consulta}: {str(e)}"
+
 
 if __name__ == "__main__":
     # Iniciar el servidor MCP

@@ -3,7 +3,7 @@ name = "agente-financiero"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "certifi>=2026.2.25",
     "curl-cffi>=0.15.0",
@@ -12,4 +12,18 @@ dependencies = [
     "playwright>=1.58.0",
     "scrapy>=2.14.2",
     "selectolax>=0.4.7",
+    "yfinance>=1.3.0",
+    "einops>=0.8.2",
+    "huggingface-hub>=1.17.0",
+    "ipykernel>=7.2.0",
+    "torch>=2.4.0",
+    "huggingface_hub>=0.33.1",
+    "matplotlib>=3.9.3",
+    "pandas>=2.2.2",
+    "tqdm>=4.67.1",
+    "safetensors>=0.6.2",
+    "plotly>=6.7.0",
+    "nbformat>=4.2.0",
+    "tensorflow>=2.21.0",
+    "scikit-learn>=1.8.0",
 ]
