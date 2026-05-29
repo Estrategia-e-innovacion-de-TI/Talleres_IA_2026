@@ -17,8 +17,8 @@ def run_gru_prediction(
     ticker: str,
     start_date: str,
     end_date: str,
-    lookback: int = 343,
-    pred_len: int = 7,
+    lookback: int = 30,
+    pred_len: int = 1,
     test_size: float = 0.15,
     epochs: int = 30,
     batch_size: int = 32
@@ -96,9 +96,12 @@ def run_gru_prediction(
     df["date"] = pd.to_datetime(df["date"])
     df = df.sort_values("date").dropna(subset=[COLUMNA_OBJETIVO]).reset_index(drop=True)
 
-    if len(df) <= lookback + pred_len:
+    required_records = lookback + pred_len + 1
+    if len(df) < required_records:
         raise ValueError(
-            "No hay suficientes registros para entrenar el modelo con el lookback y pred_len solicitados"
+            "No hay suficientes registros para entrenar el modelo con el lookback y pred_len solicitados. "
+            f"Registros disponibles: {len(df)} | Minimo requerido: {required_records}. "
+            "Tip: amplia el rango de fechas, reduce lookback o reduce pred_len."
         )
 
     csv_path = Path(f"{ticker}.csv")
@@ -109,9 +112,9 @@ def run_gru_prediction(
     serie_scaled = scaler.fit_transform(serie)
 
     X, y = [], []
-    for index in range(lookback, len(serie_scaled) - pred_len + 1):
+    for index in range(lookback, len(serie_scaled)):
         X.append(serie_scaled[index - lookback:index])
-        y.append(serie_scaled[index + pred_len - 1])
+        y.append(serie_scaled[index])
 
     X = np.array(X)
     y = np.array(y)
@@ -136,7 +139,7 @@ def run_gru_prediction(
         GRU(32),
         Dropout(0.2),
         Dense(16, activation="relu"),
-        Dense(pred_len),
+        Dense(1),
     ])
     modelo.compile(optimizer="adam", loss="mean_squared_error")
 
@@ -164,9 +167,28 @@ def run_gru_prediction(
     proximo_precio = float(scaler.inverse_transform(proxima_pred_scaled)[0, 0])
 
     ultima_fecha = df["date"].max()
-    proxima_fecha = (ultima_fecha + pd.tseries.offsets.BDay(pred_len)).date().isoformat()
+    proxima_fecha = (ultima_fecha + pd.tseries.offsets.BDay(1)).date().isoformat()
 
-    test_dates = df["date"].iloc[lookback + corte + pred_len - 1:lookback + corte + pred_len - 1 + len(real)]
+    test_dates = df["date"].iloc[lookback + corte:lookback + corte + len(real)]
+
+    # Pronostico recursivo para n pasos futuros (pred_len)
+    future_forecast = []
+    ventana = serie_scaled[-lookback:].copy()
+    for step in range(1, pred_len + 1):
+        entrada = ventana.reshape(1, lookback, 1)
+        paso_pred_scaled = modelo.predict(entrada, verbose=0)
+        paso_pred_val = float(paso_pred_scaled[0, 0])
+        paso_pred = float(scaler.inverse_transform([[paso_pred_val]])[0, 0])
+        fecha_pred = (ultima_fecha + pd.tseries.offsets.BDay(step)).date().isoformat()
+
+        future_forecast.append(
+            {
+                "date": fecha_pred,
+                "predicted_close": paso_pred,
+            }
+        )
+
+        ventana = np.vstack([ventana[1:], [[paso_pred_val]]])
 
     fig = go.Figure()
     fig.add_trace(
@@ -224,6 +246,7 @@ def run_gru_prediction(
             "date": proxima_fecha,
             "predicted_close": proximo_precio,
         },
+        "future_forecast": future_forecast,
         "forecast": forecast,
         "chart_path": str(chart_path),
         "csv_path": str(csv_path),
@@ -237,7 +260,9 @@ if __name__ == "__main__":
     result = run_gru_prediction(
         ticker="PFAVAL.CL",
         start_date="2025-01-01",
-        end_date="2026-05-28",
+        end_date="2026-05-30",
+        lookback=60,
+        pred_len=3,
     )
 
     print("Registrando tool predict_stock_gru")

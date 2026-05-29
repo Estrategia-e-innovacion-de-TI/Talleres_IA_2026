@@ -61,6 +61,9 @@ def run_kronos_prediction(
         end=end_date
     )
 
+    if df.empty:
+        raise ValueError(f"No se encontraron datos para {ticker} en el rango solicitado")
+
     # ========================================================
     # CLEAN DATA
     # ========================================================
@@ -78,16 +81,33 @@ def run_kronos_prediction(
 
     df = df.reset_index()
 
-    df.columns = [
-        'date',
-        'close',
-        'high',
-        'low',
-        'open',
-        'volume'
-    ]
-    # Convertir index a timestamp y renombrar cols
-    df['date'] = pd.to_datetime(df['date'])
+    fecha_col = "Date" if "Date" in df.columns else "date"
+    if fecha_col not in df.columns:
+        raise ValueError("No se encontro columna de fecha en los datos descargados")
+
+    df[fecha_col] = pd.to_datetime(df[fecha_col])
+    df = df.rename(
+        columns={
+            fecha_col: "date",
+            "Close": "close",
+            "High": "high",
+            "Low": "low",
+            "Open": "open",
+            "Volume": "volume",
+        }
+    )
+
+    required_cols = ["date", "open", "high", "low", "close", "volume"]
+    missing_cols = [col for col in required_cols if col not in df.columns]
+    if missing_cols:
+        raise ValueError(f"Faltan columnas requeridas en el dataset: {missing_cols}")
+
+    df = df[required_cols].dropna().reset_index(drop=True)
+
+    if len(df) < lookback:
+        raise ValueError(
+            f"No hay suficientes datos para lookback={lookback}. Disponibles: {len(df)}"
+        )
 
     # Save CSV
     df.to_csv(f"{ticker}.csv", index=False)
@@ -97,19 +117,21 @@ def run_kronos_prediction(
     # ========================================================
 
     x_df = df.loc[
-        :lookback-1,
+        len(df) - lookback:,
         ['open', 'high', 'low', 'close', 'volume']
-    ]
+    ].reset_index(drop=True)
 
     x_timestamp = df.loc[
-        :lookback-1,
+        len(df) - lookback:,
         'date'
-    ]
+    ].reset_index(drop=True)
 
-    y_timestamp = df.loc[
-        lookback:lookback+pred_len-1,
-        'date'
-    ]
+    ultima_fecha = pd.Timestamp(df['date'].iloc[-1])
+    y_timestamp = pd.bdate_range(
+        start=ultima_fecha + pd.offsets.BDay(1),
+        periods=pred_len
+    )
+    y_timestamp = pd.Series(y_timestamp)
 
     # ========================================================
     # PREDICT
@@ -131,6 +153,7 @@ def run_kronos_prediction(
 
     def plot_prediction(df, pred_df):
 
+        pred_df = pred_df.copy()
         pred_df.index = df.index[-pred_df.shape[0]:]
 
         sr_close = df['close']
@@ -233,21 +256,24 @@ def run_kronos_prediction(
     print(pred_df.head())
 
     # Combine historical and forecasted data for plotting
-    df_plot = df.loc[:lookback+pred_len-1]
+    df_plot = df.loc[len(df) - lookback:]
 
     chart_path = plot_prediction(
         df_plot,
         pred_df
     )
 
+    forecast_records = pred_df.to_dict(orient="records")
+    forecast_dates = [pd.Timestamp(ts).date().isoformat() for ts in y_timestamp]
+    for idx, row in enumerate(forecast_records):
+        if idx < len(forecast_dates):
+            row["date"] = forecast_dates[idx]
+
     return {
         "ticker": ticker,
-        "forecast": pred_df.to_dict(
-            orient="records"
-        ),
+        "forecast": forecast_records,
         "chart_path": chart_path
     }
-
 
 # ============================================================
 # LOCAL TEST
