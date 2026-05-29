@@ -11,7 +11,7 @@ from tensorflow.keras.layers import GRU, Dense, Dropout, Input
 from tensorflow.keras.models import Sequential
 
 
-COLUMNA_OBJETIVO = "Close"
+COLUMNA_OBJETIVO = "close"
 
 def run_gru_prediction(
     ticker: str,
@@ -35,30 +35,66 @@ def run_gru_prediction(
     if epochs < 1 or batch_size < 1:
         raise ValueError("epochs y batch_size deben ser enteros positivos")
 
+    # ========================================================
+    # DOWNLOAD DATA
+    # ========================================================
+
     df = yf.download(
         ticker,
         start=start_date,
-        end=end_date,
-        progress=False,
-        auto_adjust=False,
+        end=end_date
     )
+
+    # df = yf.download(
+    #     ticker,
+    #     start=start_date,
+    #     end=end_date,
+    #     progress=False,
+    #     auto_adjust=False,
+    # )
+
+    # ========================================================
+    # CLEAN DATA
+    # ========================================================
+
+    # Eliminar filas multi index
+    df.columns = df.columns.get_level_values(0)
+
+    # Verificar duplicados en el índice
+    duplicados = df.index.duplicated().sum()
+
+    print(f"Duplicados en índice: {duplicados}")
+
+    # Manejar nombres de columna
+    df.columns.name = None
+
+    df = df.reset_index()
+
+    df.columns = [
+        'date',
+        'close',
+        'high',
+        'low',
+        'open',
+        'volume'
+    ]
 
     if df.empty:
         raise ValueError(f"No se encontraron datos historicos para {ticker}")
 
-    if isinstance(df.columns, pd.MultiIndex):
-        df.columns = df.columns.get_level_values(0)
+    # if isinstance(df.columns, pd.MultiIndex):
+    #     df.columns = df.columns.get_level_values(0)
 
-    df.columns.name = None
-    df = df.reset_index()
+    # df.columns.name = None
+    # df = df.reset_index()
 
-    if "Date" not in df.columns or COLUMNA_OBJETIVO not in df.columns:
+    if "date" not in df.columns or COLUMNA_OBJETIVO not in df.columns:
         raise ValueError(
-            f"El dataset descargado no contiene las columnas requeridas: Date y {COLUMNA_OBJETIVO}"
+            f"El dataset descargado no contiene las columnas requeridas: date y {COLUMNA_OBJETIVO}"
         )
 
-    df["Date"] = pd.to_datetime(df["Date"])
-    df = df.sort_values("Date").dropna(subset=[COLUMNA_OBJETIVO]).reset_index(drop=True)
+    df["date"] = pd.to_datetime(df["date"])
+    df = df.sort_values("date").dropna(subset=[COLUMNA_OBJETIVO]).reset_index(drop=True)
 
     if len(df) <= lookback + pred_len:
         raise ValueError(
@@ -66,7 +102,7 @@ def run_gru_prediction(
         )
 
     csv_path = Path(f"{ticker}.csv")
-    df.to_csv(csv_path, index=False)
+    # df.to_csv(csv_path, index=False)
 
     serie = df[[COLUMNA_OBJETIVO]].values
     scaler = MinMaxScaler(feature_range=(0, 1))
@@ -127,10 +163,10 @@ def run_gru_prediction(
     proxima_pred_scaled = modelo.predict(ultimos_scaled, verbose=0)
     proximo_precio = float(scaler.inverse_transform(proxima_pred_scaled)[0, 0])
 
-    ultima_fecha = df["Date"].max()
+    ultima_fecha = df["date"].max()
     proxima_fecha = (ultima_fecha + pd.tseries.offsets.BDay(pred_len)).date().isoformat()
 
-    test_dates = df["Date"].iloc[lookback + corte + pred_len - 1:lookback + corte + pred_len - 1 + len(real)]
+    test_dates = df["date"].iloc[lookback + corte + pred_len - 1:lookback + corte + pred_len - 1 + len(real)]
 
     fig = go.Figure()
     fig.add_trace(

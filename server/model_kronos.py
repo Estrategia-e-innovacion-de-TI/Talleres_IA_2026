@@ -3,6 +3,7 @@ import os
 import yfinance as yf
 import pandas as pd
 from pathlib import Path
+import matplotlib.pyplot as plt
 
 # ============================================================
 # PATH
@@ -60,9 +61,6 @@ def run_kronos_prediction(
         end=end_date
     )
 
-    # Save CSV
-    df.to_csv(f"{ticker}.csv")
-
     # ========================================================
     # CLEAN DATA
     # ========================================================
@@ -80,9 +78,6 @@ def run_kronos_prediction(
 
     df = df.reset_index()
 
-    # Convertir index a timestamp y renombrar cols
-    df['index'] = pd.to_datetime(df['index'])
-
     df.columns = [
         'date',
         'close',
@@ -91,6 +86,11 @@ def run_kronos_prediction(
         'open',
         'volume'
     ]
+    # Convertir index a timestamp y renombrar cols
+    df['date'] = pd.to_datetime(df['date'])
+
+    # Save CSV
+    df.to_csv(f"{ticker}.csv", index=False)
 
     # ========================================================
     # PREPARE INPUTS
