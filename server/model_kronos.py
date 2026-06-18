@@ -5,18 +5,6 @@ import pandas as pd
 from pathlib import Path
 import matplotlib.pyplot as plt
 
-# ============================================================
-# PATH
-# ============================================================
-
-# current_dir = Path(__file__).resolve().parent
-# project_path = current_dir / "Kronos"
-# sys.path.append(str(project_path))
-
-
-import sys
-from pathlib import Path
-
 # Subir hasta la carpeta GitHub
 ruta_base = Path(__file__).resolve().parents[2]
 # Agregar al path

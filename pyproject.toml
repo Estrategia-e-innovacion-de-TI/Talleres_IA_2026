@@ -3,7 +3,7 @@ name = "agente-financiero"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12,<3.13"
+requires-python = ">=3.12, <3.13"
 dependencies = [
     "certifi>=2026.2.25",
     "curl-cffi>=0.15.0",
